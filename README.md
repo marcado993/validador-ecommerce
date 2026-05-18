@@ -2,6 +2,12 @@
 
 `/GET /POST /PUT /DELETE` APIs for managing cakes.
 
+## Integrantes
+
+* Daniel Moncayo
+* Luis Guerrero
+* Jhair Zambrano
+
 ## Tech stack
 
 * Java 8

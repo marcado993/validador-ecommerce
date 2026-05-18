@@ -76,4 +76,47 @@ class DiscountServiceTest {
         assertThrows(IllegalArgumentException.class,
             () -> discountService.calculateDiscount(total, quantity, null));
     }
+
+    // CASOS BORDE
+
+    /**
+     * Valida que no se aplique ningún descuento por volumen cuando la cantidad sea exactamente 10.
+     * Esta prueba garantiza que la función calculateDiscount no aplique el descuento del 15 %
+     * a los pedidos con una cantidad exacta de 10. Verifica la corrección de la lógica del descuento,
+     * ya que el umbral para aplicar el descuento por volumen es estrictamente mayor que 10.
+     */
+    @Test
+    void shouldNotApplyVolumeDiscountWhenQuantityIsExactly10(){
+        //Arrange
+        double total = 1000.0;
+        int quantity = 10;
+        long customerId = 1L;
+
+        //Act
+        double result = discountService.calculateDiscount(total, quantity, customerId);
+
+        //Assert
+        assertEquals(0.0, result, 0.001);
+    }
+
+    /**
+     * Valida que no se aplique el descuento por cliente VIP cuando el total es exactamente 500.0.
+     */
+    @Test
+    void shouldNotApplyVipDiscountWhenTotalIsExactly500() {
+        // Arrange
+        double total = 500.0; // Límite
+        int quantity = 5;
+        long customerId = 2L;
+
+        // No need to stub isVipCustomer since the discount won't apply at the boundary anyway
+
+        // Act
+        double result = discountService.calculateDiscount(total, quantity, customerId);
+
+        // Assert
+        // El descuento esperado es 0.0 ya que 500.0 no es estrictamente mayor que 500
+        assertEquals(0.0, result, 0.0001);
+    }
+
 }
