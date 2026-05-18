@@ -24,9 +24,11 @@ class DiscountServiceTest {
         // Arrange
         double total = 1000.0;
         int quantity = 11;
+        long customerId = 1L;
+        when(customerService.isVipCustomer(customerId)).thenReturn(false);
 
         // Act
-        double result = discountService.calculateDiscount(total, quantity, 1L);
+        double result = discountService.calculateDiscount(total, quantity, customerId);
 
         // Assert
         assertEquals(150.0, result, 0.0001);
@@ -43,6 +45,19 @@ class DiscountServiceTest {
 
         // Assert
         assertEquals(60.0, result, 0.0001);
+    }
+
+    @Test
+    void shouldReturnZeroWhenNotVipAndNoVolumeDiscount() {
+        // Arrange
+        long customerId = 3L;
+        when(customerService.isVipCustomer(customerId)).thenReturn(false);
+
+        // Act
+        double result = discountService.calculateDiscount(400.0, 5, customerId);
+
+        // Assert
+        assertEquals(0.0, result, 0.0001);
     }
 
     @Test
@@ -91,6 +106,7 @@ class DiscountServiceTest {
         double total = 1000.0;
         int quantity = 10;
         long customerId = 1L;
+        when(customerService.isVipCustomer(customerId)).thenReturn(false);
 
         //Act
         double result = discountService.calculateDiscount(total, quantity, customerId);
@@ -108,8 +124,7 @@ class DiscountServiceTest {
         double total = 500.0; // Límite
         int quantity = 5;
         long customerId = 2L;
-
-        // No need to stub isVipCustomer since the discount won't apply at the boundary anyway
+        when(customerService.isVipCustomer(customerId)).thenReturn(true);
 
         // Act
         double result = discountService.calculateDiscount(total, quantity, customerId);
