@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import epn.edu.ec.exception.CakeNotFoundException;
+import epn.edu.ec.exception.CustomerNotFoundException;
 import epn.edu.ec.model.cake.CakeResponse;
 import epn.edu.ec.model.cake.CakesResponse;
 import epn.edu.ec.model.cake.CreateCakeRequest;
@@ -79,7 +79,7 @@ public class CakeController {
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
-    @ExceptionHandler(CakeNotFoundException.class)
+    @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(value = NOT_FOUND)
     private void cakeNotFoundException() {
     }

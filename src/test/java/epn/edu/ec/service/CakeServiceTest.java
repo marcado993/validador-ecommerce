@@ -19,7 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import epn.edu.ec.exception.CakeNotFoundException;
+import epn.edu.ec.exception.CustomerNotFoundException;
 import epn.edu.ec.model.cake.CakeResponse;
 import epn.edu.ec.model.cake.CakesResponse;
 import epn.edu.ec.model.cake.CreateCakeRequest;
@@ -91,7 +91,7 @@ public class CakeServiceTest {
         long nonExistentCakeId = 999L;
         when(cakeRepository.findById(nonExistentCakeId)).thenReturn(Optional.empty());
         //ACT & ASSERT
-        assertThrows(CakeNotFoundException.class, () -> {
+        assertThrows(CustomerNotFoundException.class, () -> {
             cakeService.getCakeById(nonExistentCakeId);
         });
     }

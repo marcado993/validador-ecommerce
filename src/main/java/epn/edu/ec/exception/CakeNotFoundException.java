@@ -1,4 +1,4 @@
 package epn.edu.ec.exception;
 
-public class CakeNotFoundException extends RuntimeException {
+public class CakeNotFoundException  extends RuntimeException {
 }

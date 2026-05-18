@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 import org.springframework.stereotype.Service;
 
-import epn.edu.ec.exception.CakeNotFoundException;
+import epn.edu.ec.exception.CustomerNotFoundException;
 import epn.edu.ec.model.cake.CakeResponse;
 import epn.edu.ec.model.cake.CakesResponse;
 import epn.edu.ec.model.cake.CreateCakeRequest;
@@ -62,7 +62,7 @@ public class CakeService {
     private Cake findExistingCake(long cakeId) {
         return cakeRepository.findById(cakeId).orElseThrow(() -> {
             log.error("cake with id not found {}", cakeId);
-            throw new CakeNotFoundException();
+            throw new CustomerNotFoundException();
         });
     }
 
